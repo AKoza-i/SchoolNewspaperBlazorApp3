@@ -1,0 +1,10 @@
+﻿using SchoolNewspaperBlazorApp.Data;
+
+namespace SchoolNewspaperBlazorApp.Interfaces.Repository
+{
+    public interface IArticleRepository
+    {
+        Task AddArticleAsync(Article article);
+        Task<List<Article>> GetAllArticlesAsync();
+    }
+}
