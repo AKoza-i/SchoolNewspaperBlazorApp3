@@ -17,5 +17,9 @@ namespace SchoolNewspaperBlazorApp.Repository
             await _context.Articles.AddAsync(article);
             await _context.SaveChangesAsync();
         }
+        public async Task<List<Article>> GetAllArticlesAsync()
+        {
+            return await _context.Articles.ToListAsync();
+        }
     }
 }
