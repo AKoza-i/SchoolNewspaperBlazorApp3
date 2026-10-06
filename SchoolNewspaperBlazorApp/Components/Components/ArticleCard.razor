@@ -1,6 +1,7 @@
 ﻿@using SchoolNewspaperBlazorApp.Data
 @foreach (var article in Articles)
 {
+<NavLink class="nav-link" href="@($"/article/{article.Id}")">
     <div class="card" style="width: 18rem;">
         <img src="https://picsum.photos/id/237/200/300" class="card-img-top img-fluid" alt="...">
         <div class="card-body">
@@ -9,6 +10,7 @@
             <p class="card-author">@article.Author</p>
         </div>
     </div>
+    </NavLink>
 }
 
 @code {

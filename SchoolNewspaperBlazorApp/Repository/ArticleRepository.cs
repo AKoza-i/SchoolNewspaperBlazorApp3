@@ -20,6 +20,16 @@ namespace SchoolNewspaperBlazorApp.Repository
         public async Task<List<Article>> GetAllArticlesAsync()
         {
             return await _context.Articles.ToListAsync();
+           
+        }
+        public async Task<Article> GetArticleByIdAsync(int id)
+        {
+            var article = await _context.Articles.FirstOrDefaultAsync(a => a.Id == id);
+            if (article == null)
+            {
+                throw new Exception($"Article with ID {id} not found.");
+            }
+            return article;
         }
     }
 }
