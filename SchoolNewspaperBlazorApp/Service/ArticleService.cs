@@ -12,8 +12,15 @@ namespace SchoolNewspaperBlazorApp.Service
         {
             _articleRepository = articleRepository;
         }
-        public async Task AddArticleAsync(Article article)
+        public async Task AddArticleAsync(string title, string text, string author)
         {
+            var article = new Article
+            {
+                Title = title,
+                Text = text,
+                Author = author,
+                PublishDate = DateTime.Now
+            };
             await _articleRepository.AddArticleAsync(article);
         }
         public async Task<List<Article>> GetAllArticlesAsync()
