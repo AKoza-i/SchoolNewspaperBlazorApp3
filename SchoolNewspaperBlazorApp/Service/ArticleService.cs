@@ -25,7 +25,7 @@ namespace SchoolNewspaperBlazorApp.Service
         }
         public async Task<List<Article>> GetAllArticlesAsync()
         {
-            var articleList = await _articleRepository.GetAllArticlesAsync();
+            List<Article> articleList = await _articleRepository.GetAllArticlesAsync();
             if(articleList.IsNullOrEmpty())
             {
                 throw new Exception("No articles found.");
