@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using SchoolNewspaperBlazorApp.Data;
 using SchoolNewspaperBlazorApp.Interfaces.Repository;
 using SchoolNewspaperBlazorApp.Interfaces.Service;
@@ -39,6 +40,13 @@ namespace SchoolNewspaperBlazorApp.Service
                 throw new Exception($"Article with ID {id} not found.");
             }
             return article;
+        }
+        public async Task RemoveArticleById(int id)
+        {
+            if (id > 0)
+            {
+                await _articleRepository.GetArticleByIdAsync(id);
+            }
         }
     }
 }
