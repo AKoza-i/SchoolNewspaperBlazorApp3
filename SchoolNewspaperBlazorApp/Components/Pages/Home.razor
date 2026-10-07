@@ -2,16 +2,37 @@
 @using SchoolNewspaperBlazorApp.Components.Components
 @using SchoolNewspaperBlazorApp.Data
 @using SchoolNewspaperBlazorApp.Interfaces.Service
-@inject IArticleService articleService;
+@inject IArticleService articleService
 
-<ArticleCard Articles="articles"/>
+<PageTitle>Strona Główna</PageTitle>
 
-
-@code 
+@if (articles == null)
 {
-    public List<Article> articles = new List<Article>();
+    <!-- 1. Stan ładowania danych z bazy -->
+    <p><em>Ładowanie artykułów...</em></p>
+}
+else if (articles.Count == 0)
+{
+    <!-- 2. Obsługa pustej bazy danych (zamiast błędu aplikacji) -->
+    <div class="alert alert-info">Brak artykułów do wyświetlenia.</div>
+}
+else
+{
+    <!-- 3. Przekazanie załadowanych danych do Twojego komponentu -->
+    <ArticleCard Articles="articles" />
+}
+
+@code
+{
+    // Zmieniamy na typ nullable (?), aby Blazor wiedział, kiedy dane są w trakcie pobierania
+    private List<Article>? articles;
+
     protected override async Task OnInitializedAsync()
     {
+        // Kompilator najpierw wyrenderuje sekcję @if (articles == null)
+        // Następnie asynchronicznie pobierze dane z serwisu
         articles = await articleService.GetAllArticlesAsync();
+
+        // Po zakończeniu tej metody Blazor automatycznie odświeży widok
     }
 }

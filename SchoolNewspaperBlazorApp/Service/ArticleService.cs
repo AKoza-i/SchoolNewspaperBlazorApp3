@@ -26,14 +26,10 @@ namespace SchoolNewspaperBlazorApp.Service
         public async Task<List<Article>> GetAllArticlesAsync()
         {
             List<Article> articleList = await _articleRepository.GetAllArticlesAsync();
-            if(articleList.IsNullOrEmpty())
-            {
-                throw new Exception("No articles found.");
-            }
-            else
-            {
-                return articleList;
-            }
+
+            // Zamiast rzucać wyjątek, bezpiecznie zwracamy listę.
+            // Jeśli articleList jest null, zwracamy nową pustą listę.
+            return articleList ?? new List<Article>();
         }
         public async Task<Article> GetArticleByIdAsync(int id)
         {
